@@ -1,0 +1,13 @@
+[
+  { "title": "The Great Gatsby", "author": "F. Scott Fitzgerald" },
+  { "title": "1984", "author": "George Orwell" },
+  { "title": "To Kill a Mockingbird", "author": "Harper Lee" },
+  { "title": "Moby Dick", "author": "Herman Melville" },
+  { "title": "Pride and Prejudice", "author": "Jane Austen" },
+  { "title": "War and Peace", "author": "Leo Tolstoy" },
+  { "title": "Crime and Punishment", "author": "Fyodor Dostoevsky" },
+  { "title": "The Odyssey", "author": "Homer" },
+  { "title": "The Catcher in the Rye", "author": "J.D. Salinger" },
+  { "title": "The Lord of the Rings", "author": "J.R.R. Tolkien" }
+  // Add as many entries as needed for testing
+]
