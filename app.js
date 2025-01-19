@@ -1,5 +1,5 @@
 let books = []; // Store fetched books
-const rowsPerPage = 5; // Number of rows per page
+const rowsPerPage = 3; // Number of rows per page
 let currentPage = 1; // Current page
 
 // Fetch data from books.json
@@ -26,14 +26,13 @@ function displayBooks() {
   // Display books
   bookTable.innerHTML = '';
   if (pageBooks.length === 0) {
-    bookTable.innerHTML = '<tr><td colspan="3" class="no-results">No results found</td></tr>';
+    bookTable.innerHTML = '<tr><td colspan="2" class="no-results">No results found</td></tr>';
   } else {
     pageBooks.forEach(book => {
       const row = `
         <tr>
           <td>${book.title}</td>
           <td>${book.author}</td>
-          <td>${book.year}</td>
         </tr>
       `;
       bookTable.innerHTML += row;
