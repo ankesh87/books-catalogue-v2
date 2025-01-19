@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Catalog with Pagination</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    input[type="text"] {
+      width: 48%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .pagination {
+      text-align: center;
+    }
+    .pagination button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      background-color: #f4f4f4;
+      cursor: pointer;
+    }
+    .pagination button.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .no-results {
+      text-align: center;
+      color: #888;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Book Catalog Search</h1>
+    <input type="text" id="titleSearch" placeholder="Search by Title" oninput="searchBooks()">
+    <input type="text" id="authorSearch" placeholder="Search by Author" oninput="searchBooks()">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody id="bookTable"></tbody>
+    </table>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
