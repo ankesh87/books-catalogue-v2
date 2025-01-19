@@ -1,5 +1,5 @@
 let books = []; // Store fetched books
-const rowsPerPage = 3; // Number of rows per page
+const rowsPerPage = 500; // Number of rows per page
 let currentPage = 1; // Current page
 
 // Fetch data from books.json
