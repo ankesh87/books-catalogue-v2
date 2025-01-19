@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Catalog with Pagination</title>
+  <title>Dynamic Book Catalog</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -16,15 +16,14 @@
     input[type="text"] {
       width: 48%;
       padding: 10px;
-      margin-bottom: 20px;
+      margin: 10px 1%;
       border: 1px solid #ccc;
       border-radius: 5px;
-      display: inline-block;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-top: 20px;
     }
     th, td {
       padding: 10px;
@@ -35,18 +34,19 @@
       background-color: #f4f4f4;
     }
     .pagination {
+      margin: 20px 0;
       text-align: center;
     }
     .pagination button {
-      margin: 5px;
-      padding: 10px 15px;
+      margin: 0 5px;
+      padding: 5px 10px;
       border: 1px solid #ccc;
       background-color: #f4f4f4;
       cursor: pointer;
     }
     .pagination button.active {
-      background-color: #007bff;
-      color: #fff;
+      font-weight: bold;
+      background-color: #ddd;
     }
     .no-results {
       text-align: center;
@@ -57,14 +57,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Book Catalog Search</h1>
-    <input type="text" id="titleSearch" placeholder="Search by Title" oninput="searchBooks()">
-    <input type="text" id="authorSearch" placeholder="Search by Author" oninput="searchBooks()">
+    <h1>Book Catalog</h1>
+    <input type="text" id="searchTitle" placeholder="Search by Title" onkeyup="searchBooks()">
+    <input type="text" id="searchAuthor" placeholder="Search by Author" onkeyup="searchBooks()">
     <table>
       <thead>
         <tr>
           <th>Title</th>
           <th>Author</th>
+          <th>Year</th>
         </tr>
       </thead>
       <tbody id="bookTable"></tbody>
