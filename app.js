@@ -1,81 +1,72 @@
-// app.js
+let books = []; // Store fetched books
+const rowsPerPage = 5; // Number of rows per page
+let currentPage = 1; // Current page
 
-let books = [];
-let filteredBooks = [];
-let currentPage = 1;
-const itemsPerPage = 5; // Adjust items per page as needed
-
-// Fetch the dataset
+// Fetch data from books.json
 fetch('books.json')
   .then(response => response.json())
   .then(data => {
     books = data;
-    filteredBooks = books; // Initialize with the full dataset
-    displayBooks();
-    setupPagination();
+    displayBooks(); // Display initial data
   })
   .catch(error => console.error('Error fetching books:', error));
 
-// Function to display books on the current page
+// Display books with pagination
 function displayBooks() {
   const bookTable = document.getElementById('bookTable');
-  bookTable.innerHTML = ''; // Clear previous results
+  const pagination = document.getElementById('pagination');
+  const filteredBooks = filterBooks();
 
-  // Calculate start and end indices
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredBooks.length / rowsPerPage);
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
+  const pageBooks = filteredBooks.slice(start, end);
 
-  // Get books for the current page
-  const booksToDisplay = filteredBooks.slice(startIndex, endIndex);
-
-  if (booksToDisplay.length === 0) {
-    bookTable.innerHTML = '<tr><td colspan="2" class="no-results">No results found</td></tr>';
-    return;
+  // Display books
+  bookTable.innerHTML = '';
+  if (pageBooks.length === 0) {
+    bookTable.innerHTML = '<tr><td colspan="3" class="no-results">No results found</td></tr>';
+  } else {
+    pageBooks.forEach(book => {
+      const row = `
+        <tr>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.year}</td>
+        </tr>
+      `;
+      bookTable.innerHTML += row;
+    });
   }
 
-  // Add rows for each book
-  booksToDisplay.forEach(book => {
-    const row = `
-      <tr>
-        <td>${book.title}</td>
-        <td>${book.author}</td>
-      </tr>
-    `;
-    bookTable.innerHTML += row;
-  });
-}
-
-// Function to filter books based on search input
-function searchBooks() {
-  const titleQuery = document.getElementById('titleSearch').value.toLowerCase();
-  const authorQuery = document.getElementById('authorSearch').value.toLowerCase();
-
-  filteredBooks = books.filter(book =>
-    book.title.toLowerCase().includes(titleQuery) &&
-    book.author.toLowerCase().includes(authorQuery)
-  );
-
-  currentPage = 1; // Reset to the first page
-  displayBooks();
-  setupPagination();
-}
-
-// Function to set up pagination controls
-function setupPagination() {
-  const pagination = document.getElementById('pagination');
-  pagination.innerHTML = ''; // Clear previous pagination buttons
-
-  const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
-
+  // Display pagination
+  pagination.innerHTML = '';
   for (let i = 1; i <= totalPages; i++) {
     const button = document.createElement('button');
     button.textContent = i;
-    button.classList.add(i === currentPage ? 'active' : '');
-    button.addEventListener('click', () => {
+    button.className = i === currentPage ? 'active' : '';
+    button.onclick = () => {
       currentPage = i;
       displayBooks();
-      setupPagination();
-    });
+    };
     pagination.appendChild(button);
   }
+}
+
+// Filter books based on search inputs
+function filterBooks() {
+  const titleQuery = document.getElementById('searchTitle').value.toLowerCase();
+  const authorQuery = document.getElementById('searchAuthor').value.toLowerCase();
+
+  return books.filter(book =>
+    book.title.toLowerCase().includes(titleQuery) &&
+    book.author.toLowerCase().includes(authorQuery)
+  );
+}
+
+// Update book list on search
+function searchBooks() {
+  currentPage = 1; // Reset to first page
+  displayBooks();
 }
